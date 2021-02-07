@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Create a Questionnaire</title>
+</head>
+<script th:inline="javascript">
+	function addFields() {
+		// Number of inputs to create
+		var number = document.getElementById("questionnum").value;
+		// Container <div> where dynamic content will be placed
+		var container = document.getElementById("container");
+		// Clear previous contents of the container
+		while (container.hasChildNodes()) {
+			container.removeChild(container.lastChild);
+		}
+		for (i = 0; i < number; i++) {
+			// Append a node with a random text
+			container.appendChild(document.createTextNode("Question " + (i + 1)
+					+ ":"));
+			// Create an <input> element, set its type and name attributes
+			var input = document.createElement("input");
+			input.type = "text";
+			input.name = "question";
+			container.appendChild(input);
+			// Append a line break 
+			container.appendChild(document.createElement("br"));
+		}
+	}
+</script>
+</head>
+<body>
+	<div align="left">
+		<a th:href="@{/GoToAdminHomePage}">Back</a>
+	</div>
+	<form action="#" th:action="@{/CreateProduct}" method="POST"
+		enctype="multipart/form-data">
+		<fieldset>
+			<p>
+				Product name: <input type="text" name="productname" required>
+			</p>
+
+			<p>
+				Photo: <input type="file" id="photoFile" name="picture">
+			</p>
+			<input type="submit" name="Create Product" value="Create Product">
+		</fieldset>
+	</form>
+	
+	<form action="#" th:action="@{/CreateQuestionnaire}" method="POST">
+		<fieldset>
+			<p>
+				<label for="products">Choose a product:</label> <select name="productId"
+					id="productId">
+					<option th:each="p : ${products}" th:value="${p.id}"
+						th:text="${p.name}"></option>
+				</select>
+			</p>
+			<p>
+				Date: <input type="date" name="date" required>
+			</p>
+
+			<p>
+				Number of questions: <input type="text" id="questionnum" name="questionnum" value=""> 
+				<a href="#" id="filldetails" onclick="addFields()">Populate</a>
+			</p>
+			<div id="container"></div>
+			<input type="submit" name="Create Questionnaire" value="Create Questionnaire">
+		</fieldset>
+	</form>
+	<p style="color:red;" th:text="${error}"></p>
+
+</body>
+</html>

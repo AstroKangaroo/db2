@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Delete Questionnaires</title>
+<body>
+	<h1>Questionnaire Deletion Page</h1>
+
+	<div align="left">
+		<a th:href="@{/GoToAdminHomePage}">Back</a>
+	</div>
+
+        <p>Choose a date to delete</p>
+        <form action="#" th:action="@{/DeleteQuestionnaire}" method="POST">
+            <fieldset>
+                <p>
+                    <label for="Questionnaires">Choose a date:</label> <select name="questionnaireid" id="questionnaireid">
+                        <option th:each="q : ${questionnaires}" th:value="${q.id}"
+                            th:text="${q.date}"></option>
+                    </select>
+                </p>
+                <input type="submit" name="" value="Delete">
+            </fieldset>
+        </form>		
+	 
+</body>
+</html>
+
+
+

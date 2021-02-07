@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+</head>
+<body>
+	<h1>Home Page</h1>
+	<a th:text="'Welcome ' + ${user.username} + '!'"></a>
+	<div align="right">
+		<a th:href="@{/Logout}">Logout</a>
+	</div>
+	
+	<div align="left">
+		<a th:href="@{/GoToLeaderboardPage}">Leaderboard</a>
+	</div>
+	
+	<div th:if="${product == null}">
+		<p><b>There is no questionnaire for today!</b></p>
+	</div>
+
+	<div th:unless="${product == null}">
+		<img width="500px" alt="photo"
+			th:src="'data:image/jpeg;base64,' + ${product.getImageData()}">
+		<p th:text="'Product of the day: ' + ${product.name}" />
+	</div>
+	
+	<div th:unless="${product == null}">
+		<a th:href="@{/GoToQuestionnairePage}">Access Questionnaire</a>
+	</div>
+	
+	<div th:unless="${product == null}">
+	<form action="SendReview" method="POST">
+		Write your review: <input type="text" name="review" required> <br>
+		<input type="submit" value="Send Review">
+	</form>
+	</div>
+	
+	<div th:unless="${product == null}" >
+	<div th:each="r : ${product.reviews}">
+	         <span th:text="${r.user.username} + ' wrote: '"></span>
+	         <span th:text="${r.text}"></span>
+	         <span th:text="' at ' + ${r.date}"></span>
+	         <br/>
+	</div>
+	</div>
+
+</body>
+</html>

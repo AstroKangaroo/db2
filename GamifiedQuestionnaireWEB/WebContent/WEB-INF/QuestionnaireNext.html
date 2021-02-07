@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Questionnaire</title>
+</head>
+<body>
+	<h1>Questionnaire</h1>
+	<div align="right">
+		<a th:href="@{/Logout}">Logout</a>
+	</div>
+	
+
+	<div>
+		<img width="500px" alt="photo"
+			th:src="'data:image/jpeg;base64,' + ${product.getImageData()}">
+		<p th:text="'Product of the day: ' + ${product.name}" />
+	</div>
+	
+	<div align="left">
+		<a th:href="@{/GoToQuestionnairePage}">Back</a>
+	</div>
+	
+	<div>
+	<form action="SubmitQuestionnaire" method="POST">	
+	         <span th:text="${questions[0]}"></span>
+	         <input type="number" min="18" max="100" name="age">
+	         <br/>
+	         
+	         <span th:text="${questions[1]}"></span>
+	         <select name="sex" id="sex">
+	         <option value="" selected></option>
+			 <option value="female">Female</option>
+			 <option value="male">Male</option>
+			 <option value="other">Other</option>
+			 </select>
+	         <br/>
+	         
+	         <span th:text="${questions[2]}"></span>
+	         <select name="expertise" id="expertise">
+	         <option value="" selected></option>
+			 <option value="low">Low</option>
+			 <option value="medium">Medium</option>
+			 <option value="high">High</option>
+			 </select>
+	         <br/>
+		<input type="submit" value="Submit">
+	</form>
+	</div>
+	
+	<div>
+	<form action="CancelQuestionnaire" method="POST">
+		<input type="submit" value="Cancel">
+	</form>
+	</div>
+	
+
+</body>
+</html>

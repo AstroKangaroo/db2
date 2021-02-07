@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin Panel</title>
+<body>
+	<h1>Admin Panel</h1>
+	
+	<div align="right">
+		<a th:href="@{/Logout}">Logout</a>
+	</div>
+	
+	<div align="left">
+		<a th:href="@{/GoToCreationPage}">Create a Questionnaire</a>
+	</div>
+	
+	<div align="left">
+		<a th:href="@{/GoToDeletionPage}">Delete Questionnaires</a>
+	</div>
+	
+	<div align="left">
+		<a th:href="@{/GoToInspectionPage}">Inspect Questionnaires</a>
+	</div>
+	
+	
+
+</body>
+</html>

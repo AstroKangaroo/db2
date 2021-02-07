@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inspect Questionnaires</title>
+<style>
+.formdiv {
+	width: "30%";
+	float: left;
+	display: inline;
+	margin: 5px;
+	padding: 5px;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+<body>
+	<h1>Questionnaire Inspection Page</h1>
+
+	<div align="left">
+		<a th:href="@{/GoToAdminHomePage}">Back</a>
+	</div>
+
+        <p>Choose a date to inspect</p>
+        <form action="#" th:action="@{/GoToInspectionPage}" method="POST">
+            <fieldset>
+                <p>
+                    <label for="Questionnaires">Choose a date:</label> <select name="questionnaireid" id="questionnaireid">
+                        <option th:each="q : ${questionnaires}" th:value="${q.id}"
+                            th:text="${q.date}"></option>
+                    </select>
+                    <span th:if="${users != null}">
+                    <label for="Users">Choose a user:</label> <select name="userid" id="userid">
+                        <option th:each="u : ${users}" th:value="${u.id}"
+                            th:text="${u.username}"></option>
+                    </select></span>
+                </p>
+                <input type="submit" name="" value="Inspect">
+            </fieldset>
+        </form>
+        
+        <div class="formdiv">
+        <p><b>Users who submitted the questionnaire:</b></p>
+        <table th:if="${submitstatuses != null}">
+        <tr>
+    		<th>Username</th>
+   			<th>Status</th>
+   			<th>Submit Date</th>
+   			<th>Last Login</th>
+  		</tr>
+	      <tr th:each="submitstatus : ${submitstatuses}">
+	         <td th:if="${submitstatus.status == 'Submitted'}" th:text="${submitstatus.user.username}"></td>
+	         <td th:if="${submitstatus.status == 'Submitted'}" th:text="${submitstatus.status}"></td>
+	         <td th:if="${submitstatus.status == 'Submitted'}" th:text="${submitstatus.date}"></td>
+	         <td th:if="${submitstatus.status == 'Submitted'}" th:text="${submitstatus.user.lastlogin}"></td>  
+	      </tr>
+	    </table>
+        </div>
+        
+        <div class="formdiv">
+        <p><b>Users who submitted the questionnaire:</b></p>
+        <table th:if="${submitstatuses != null}">
+        <tr>
+    		<th>Username</th>
+   			<th>Status</th>
+   			<th>Cancel Date</th>
+   			<th>Last Login</th>
+  		</tr>
+	      <tr th:each="submitstatus : ${submitstatuses}">
+	         <td th:if="${submitstatus.status == 'Cancelled'}" th:text="${submitstatus.user.username}"></td>
+	         <td th:if="${submitstatus.status == 'Cancelled'}" th:text="${submitstatus.status}"></td>
+	         <td th:if="${submitstatus.status == 'Cancelled'}" th:text="${submitstatus.date}"></td>
+	         <td th:if="${submitstatus.status == 'Cancelled'}" th:text="${submitstatus.user.lastlogin}"></td>  
+	      </tr>
+	    </table>
+        </div>
+        
+        <div class="formdiv">
+        <p th:if="${selectedUser == null}"><b> Answers: </b></p>
+        <p th:if="${selectedUser != null}"><b th:text="'Answers by ' + ${selectedUser.username} + ':'"></b></p>
+        <table th:if="${selectedUser != null}">
+        <tr>
+    		<th>Question</th>
+   			<th>Answer</th>
+  		</tr>
+	      <tr th:each="a : ${answers}">
+	         <td style="font-weight:bold" th:text="${a.question.text}"></td>
+	         <td th:text="${a.text}"></td> 
+	      </tr>
+	    </table>
+        </div>
+	 
+</body>
+</html>
