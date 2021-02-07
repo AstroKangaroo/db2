@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="GamifiedQuestionnaireEJB">
+	<jta-data-source>GQData</jta-data-source>
+		<class>it.polimi.db2.gunalanodabasi.entities.Admin</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Answer</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Product</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Question</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Questionnaire</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Review</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Statisticalanswer</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Submitstatus</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.User</class>
+		<class>it.polimi.db2.gunalanodabasi.entities.Forbiddenwords</class>
+		
+	</persistence-unit>
+</persistence>
